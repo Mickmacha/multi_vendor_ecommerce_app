@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const categorySchema = new mongoose.Schema({
-    name: {type:String, required:True},
-    products: [{type: mongoose.Schema.Types.ObjectId, ref: 'Product'}]
+    name: { type: String, required: True },
+    products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }]
 });
 
 const Category = mongoose.model("Category", categorySchema);
