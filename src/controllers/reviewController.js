@@ -3,7 +3,7 @@ const Review = require('../models/review');
 // Get all reviews
 exports.getAllReviews = async (req, res) => {
   try {
-    const reviews = await Review.find().populate('product');
+    const reviews = await Review.find().populate('product').populate('customer');
     res.status(200).json(reviews);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -13,7 +13,7 @@ exports.getAllReviews = async (req, res) => {
 // Get a single review by ID
 exports.getReviewById = async (req, res) => {
   try {
-    const review = await Review.findById(req.params.id).populate('product');
+    const review = await Review.findById(req.params.id).populate('product').populate('customer');
     if (!review) {
       return res.status(404).json({ error: 'Review not found' });
     }
