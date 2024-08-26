@@ -4,6 +4,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 const Vendor = require('../models/vendor');
 const Customer = require('../models/customer');
+const passportConfig = require('../config/passportConfig');
 
 const authUser = async (username, password, done) => {
     // Normally you would check the username and password here
@@ -52,15 +53,26 @@ passport.use('vendor-local', new LocalStrategy({ usernameField: 'email' }, async
 
 
 // Serialize and deserialize user
-passport.serializeUser((userObj, done) => {
-    done(null, userObj.id); // Typically you store user ID in session
-});
-
-passport.deserializeUser(async (id, done) => {
+passport.serializeUser((user, done) => {
+        done(null, { id: user.id, type: user instanceof Customer ? 'Customer' : 'Vendor' });
+    });
+passport.deserializeUser(async (obj, done) => {
     // Fetch user from database based on the ID
     // Here we're returning a dummy user
-    const authenticated_user = { id: 123, name: "Kyle" };
-    done(null, authenticated_user);
+    try{
+        if(obj.type === 'Customer'){
+            const customer = await Customer.findById(obj.id);
+            done(null, customer);
+        }
+        else{
+            const vendor = await Vendor.findById(obj.id);
+            done(null, vendor);
+        }
+    }
+    catch(error){
+        done(error);
+    }
+
 });
 
 module.exports = passport;
