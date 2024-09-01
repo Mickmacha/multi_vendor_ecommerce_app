@@ -24,7 +24,7 @@ function Registration() {
     try{
       const response = await axios.post(`${base_url}/register/customer`, formData);
       console.log(response);
-    }catch(err){
+    }catch(err: any){
       setError(err.response.data.message);
     }
   }
