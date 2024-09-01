@@ -1,6 +1,34 @@
 import React from 'react';
+import { useState } from 'react';
+import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 function Registration() {
+  let base_url = process.env.REACT_APP_API_URL;
+
+  const [formData, setFormData] = useState({});
+  const [error, setError] = useState(null);
+
+  // Handle Form Changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value
+    });
+  }
+  // Handle Form Submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try{
+      const response = await axios.post(`${base_url}/register/customer`, formData);
+      console.log(response);
+    }catch(err){
+      setError(err.response.data.message);
+    }
+  }
+
   return (
     <>
       {/* Main container for the registration form */}
@@ -19,12 +47,29 @@ function Registration() {
             {/* Form section */}
             <div className="md:w-8/12 lg:ms-6 lg:w-5/12">
               <form>
+                {/* full name input */}
+                <div className="relative mb-6">
+                  <input
+                    type="text"
+                    className="peer block w-full rounded border-0 bg-transparent px-3 py-2 leading-6 text-white placeholder-transparent focus:border-primary focus:outline-none focus:ring-0"
+                    id="fullName"
+                    onChange={handleChange}
+                    placeholder="Full name"  // Keep the placeholder but make it transparent initially
+                  />
+                  <label
+                    htmlFor="fullName"
+                    className="absolute left-3 top-2 text-gray-500 transition-transform duration-200 ease-in-out peer-placeholder-shown:top-2 peer-placeholder-shown:left-3 peer-placeholder-shown:text-gray-500 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-primary"
+                  >
+                    Full name
+                  </label>
+                  </div>
                 {/* Email input */}
                 <div className="relative mb-6">
                   <input
                     type="text"
                     className="peer block w-full rounded border border-gray-300 bg-transparent px-3 py-2 leading-6 text-white placeholder-transparent focus:border-primary focus:outline-none focus:ring-0"
                     id="email"
+                    onChange={handleChange}
                     placeholder="Email address"  // Keep the placeholder but make it transparent initially
                   />
                   <label
@@ -38,13 +83,14 @@ function Registration() {
                 <div className="relative mb-6">
                   <input
                     type="password"
-                    className="peer block w-full rounded border-0 bg-transparent px-3 py-1.5 leading-6 outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 peer-focus:text-primary placeholder-opacity-0 dark:text-white dark:placeholder:text-neutral-300 dark:peer-focus:text-primary"
+                    className="peer block w-full rounded border-0 bg-transparent px-3 py-2 leading-6 outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 peer-focus:text-primary placeholder-opacity-0 dark:text-white dark:placeholder:text-neutral-300 dark:peer-focus:text-primary"
                     id="password"
+                    onChange = {handleChange}
                     placeholder="Password"
                   />
                   <label
                     htmlFor="password"
-                    className="pointer-events-none absolute left-3 top-0 mb-0 truncate pt-1.5 leading-6 text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-primary dark:text-neutral-400 dark:peer-focus:text-primary"
+                    className="absolute left-3 top-2 text-gray-500 transition-transform duration-200 ease-in-out peer-placeholder-shown:top-2 peer-placeholder-shown:left-3 peer-placeholder-shown:text-gray-500 peer-focus:-top-4 peer-focus:left-3 peer-focus:text-sm peer-focus:text-primary"
                   >
                     Password
                   </label>
