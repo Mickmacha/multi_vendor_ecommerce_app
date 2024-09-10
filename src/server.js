@@ -1,15 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const session = require('express-session');
 dotenv.config();
+const cors = require('cors');
 
-const passport = require('./config/passport'); 
+const passport = require('./config/passportConfig');
 
 const port = process.env.PORT || 3000;
 const CONNECTION = process.env.CONNECTION;
 mongoose.set("strictQuery", false);
 
 const app = express();
+app.use(cors({
+    origin: 'http://localhost:5173', // React app URL
+    credentials: true
+}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
     secret: 'secret',
@@ -23,9 +30,6 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-app.listen(port, () => {
-    console.log(`Eapp listening at http://localhost:${port}`);
-});
 
 const start = async() => {
     try {
@@ -38,4 +42,4 @@ const start = async() => {
     }
 }
 start();
-export default app;
+module.exports = app;

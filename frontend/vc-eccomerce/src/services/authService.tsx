@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { User, AuthAction } from '../reducers/authReducer';
 
-const API_URL = 'http://localhost:3000/api/auth'; // Adjust this to your backend URL
+const API_URL = 'http://localhost:5000'; // Adjust this to your backend URL
 
 export const login = async (
   email: string,
