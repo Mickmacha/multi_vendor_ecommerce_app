@@ -29,8 +29,14 @@ app.use(morgan('dev'));
 app.use(session({
     secret: 'secret',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production', // Set secure only in production
+        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // SameSite: 'None' for production (cross-site)
+    }
 }));
+
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');

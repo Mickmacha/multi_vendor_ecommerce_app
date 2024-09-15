@@ -14,6 +14,7 @@ export const login = async (
   dispatch({ type: 'LOGIN_START' });
   try {
     const response = await axios.post(`${AUTH_URL}/login/${type}`, { email, password }, { withCredentials: true });
+    console.log("response", response.data.user); 
     dispatch({ type: 'LOGIN_SUCCESS', payload: response.data.user });
   } catch (error) {
     dispatch({ type: 'LOGIN_FAILURE', payload: 'Login failed' });
