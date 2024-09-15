@@ -1,8 +1,8 @@
 
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const Customer = require('./models/Customer');
-const Vendor = require('./models/Vendor');
+const Customer = require('../../models/customer');
+const Vendor = require('../../models/vendor');
 
 const router = express.Router();
 
@@ -36,6 +36,10 @@ router.post('/register/vendor', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         vendor = new Vendor({ name, email, password: hashedPassword });
         await vendor.save();
+        // Log vendor object in console for debugging
+        console.log('New Vendor Registered:');
+        console.log(JSON.stringify(vendor.toObject(), null, 2));
+
         res.status(201).send('Vendor registered');
     } catch (err) {
         res.status(500).send('Server error while registering vendor');

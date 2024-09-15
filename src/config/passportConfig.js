@@ -6,15 +6,6 @@ const Vendor = require('../models/vendor');
 const Customer = require('../models/customer');
 const passportConfig = require('../config/passportConfig');
 
-const authUser = async (username, password, done) => {
-    // Normally you would check the username and password here
-    // For now, we're just returning a dummy user
-    const authenticated_user = { id: 123, name: "Kyle" };
-    return done(null, authenticated_user);
-};
-
-passport.use(new LocalStrategy(authUser));
- // Customer Strategy
  passport.use('customer-local', new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
     try {
         const customer = await Customer.findOne({ email });

@@ -26,6 +26,7 @@ function Login() {
       navigate('/dashboard'); // Redirect to dashboard after successful login
     } catch (err: any) {
       setError(err.message || 'Login failed');
+      console.error('Login failed:', err);
     }
   };
 
