@@ -8,14 +8,14 @@ function CategoryForm() {
             <div className="flex items-center space-x-2 text-gray-400">
                 <span className="text-green-700 tracking-wider font-thin text-md"><a href="#">Home</a></span>
                 <span>/</span>
-                <span className="tracking-wide text-md">
+                <span className="tracking-wide text-md text-gray-700">
                     <span className="text-base">Categories</span>
                 </span>
                 <span>/</span>
             </div>
         </div>
         <div className="header my-3 h-12 px-10 flex items-center justify-between">
-            <h1 className="font-medium text-2xl">All Categories</h1>
+            <h1 className="font-medium text-black text-2xl">All Categories</h1>
         </div>
         <div className="flex flex-col mx-3 mt-6 lg:flex-row flex-grow">
             <div className="w-full lg:w-1/3 m-1">
@@ -58,6 +58,7 @@ function CategoryForm() {
             </div>
             <div className="w-full lg:w-2/3 m-1 bg-white shadow-lg text-lg rounded-sm border border-gray-200 flex-grow">
                 <div className="overflow-x-auto rounded-lg p-3">
+                    <h2 className='text-black font-semibold uppercase'> Product Categories</h2>
                     <table className="table-auto w-full">
                         <thead className="text-sm font-semibold uppercase text-gray-800 bg-gray-50 mx-auto">
                             <tr>
