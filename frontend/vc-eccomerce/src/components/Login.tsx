@@ -55,12 +55,7 @@ function Login() {
                     placeholder="Email address"
                     required
                   />
-                  <label
-                    htmlFor="email"
-                    className="absolute left-3 top-0 transform -translate-y-1/2 text-gray-500 transition-all duration-200 ease-out peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.85] dark:text-gray-400"
-                  >
-                    Email address
-                  </label>
+            
                 </div>
 
                 <div className="relative mb-6">
@@ -73,31 +68,23 @@ function Login() {
                     placeholder="Password"
                     required
                   />
-                  <label
-                    htmlFor="password"
-                    className="absolute left-3 top-0 transform -translate-y-1/2 text-gray-500 transition-all duration-200 ease-out peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.85] dark:text-gray-400"
-                  >
-                    Password
-                  </label>
-                </div>
 
+                </div >
+                <p className='flex text-gray-500 font-semibold'> Choose Account Type
+                  </p>
                 <div className="relative mb-6">
                   <select
                     id="type"
                     onChange={handleChange}
                     value={formData.type}
+                   
                     className="peer block w-full rounded border border-gray-300 bg-transparent px-3 py-2.5 leading-tight outline-none transition duration-200 ease-linear focus:border-blue-500 focus:ring-0 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
                     required
                   >
                     <option value="customer">Customer</option>
                     <option value="vendor">Vendor</option>
                   </select>
-                  <label
-                    htmlFor="type"
-                    className="absolute left-3 -top-3 text-sm text-gray-500"
-                  >
-                    Account Type
-                  </label>
+
                 </div>
 
                 <div className="mb-6 flex items-center justify-between">

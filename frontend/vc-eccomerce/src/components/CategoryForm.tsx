@@ -1,8 +1,11 @@
 import React from 'react'
 import { FaEdit, FaTrash } from "react-icons/fa";
+import Navbar from './Navbar';
 
 function CategoryForm() {
   return (
+    <div>
+    <Navbar/>
     <div className="bg-gray-100 w-full min-h-screen flex flex-col">
         <div className="header bg-white h-16 px-10 py-8 border-b-2 border-gray-200 flex items-center justify-between">
             <div className="flex items-center space-x-2 text-gray-400">
@@ -98,6 +101,7 @@ function CategoryForm() {
             
         </div>
         
+    </div>
     </div>
   )
 }
