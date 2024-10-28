@@ -261,7 +261,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ onSubmit, initialData = {} })
               <tr key={product._id} className="border-t">
                 <td>{index + 1}</td>
                 <td>
-                  <img src={product.imageUrl} className="h-8 w-8 mx-auto" alt={product.name}/>
+                  <img src={product.i`mageUrl} className="h-8 w-8 mx-auto" alt={product.name}/>
                 </td>
                 <td>{product.name}</td>
                 <td>${product.price}</td>
